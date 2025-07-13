@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shop_sphere/models/product.dart';
 
 class ProductCard extends StatelessWidget {
-  final String imageUrl;
-  final String name;
-  final double price;
-  const ProductCard({
-    super.key,
-    required this.imageUrl,
-    required this.name,
-    required this.price,
-  });
+  final Product product;
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +19,7 @@ class ProductCard extends StatelessWidget {
               topRight: Radius.circular(8.0),
             ),
             child: Image.network(
-              imageUrl,
+              product.imageUrl,
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -37,7 +31,7 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  product.name,
                   style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -46,7 +40,7 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "\$${price.toStringAsFixed(2)}",
+                      "\$${product.price.toStringAsFixed(2)}",
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w600,
