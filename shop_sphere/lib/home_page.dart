@@ -10,31 +10,32 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
-        actions: [Icon(Icons.person), Icon(Icons.add_outlined)],
+        actions: [Icon(Icons.person), Icon(Icons.more_vert)],
         leading: Icon(Icons.menu),
-        title: Text("ShopSphere"),
+        title: Text("ShopSphere", style: TextStyle(color: Colors.black)),
+        // backgroundColor: Colors.blue,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: Text(
               "Featured Products",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
             child: ListView.builder(
               itemCount: mockData.length,
               itemBuilder: (context, int index) {
-                final product = mockData[index];
-                return ProductCard(product: product);
+                return ProductCard(prod: mockData[index]);
               },
             ),
           ),
         ],
       ),
+      // body: Center(child: Text("Welcome to ShopSphere App!")),
     );
   }
 }
