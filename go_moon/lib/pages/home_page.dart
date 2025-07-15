@@ -15,7 +15,8 @@ class HomePage extends StatelessWidget {
           // color: Colors.red,
           height: _deviceHeight,
           width: _deviceWidth,
-          child: _pageTitle(),
+          padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.05),
+          child: _destinationDropDownWidget(),
         ),
       ),
     );
@@ -40,6 +41,16 @@ class HomePage extends StatelessWidget {
           image: AssetImage("assets/images/astro_moon.png"),
         ),
       ),
+    );
+  }
+
+  Widget _destinationDropDownWidget() {
+    List<DropdownMenuItem<String>> _items =
+        ['James Webb Station', 'Preneure Station'].map((e) {
+          return DropdownMenuItem(child: Text(e), value: e);
+        }).toList();
+    return Container(
+      child: DropdownButton(onChanged: (_) {}, items: _items),
     );
   }
 }
