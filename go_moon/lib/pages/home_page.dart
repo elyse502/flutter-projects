@@ -21,11 +21,7 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _pageTitle(),
-              _destinationDropDownWidget(),
-              _travellersInformationWidget(),
-            ],
+            children: [_pageTitle(), _bookRideWidget()],
           ),
         ),
       ),
@@ -54,6 +50,21 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget _bookRideWidget() {
+    return Container(
+      height: _deviceHeight * 0.25,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _destinationDropDownWidget(),
+          _travellersInformationWidget(),
+        ],
+      ),
+    );
+  }
+
   Widget _destinationDropDownWidget() {
     return CustomDropDownButtonClass(
       values: const ['James Webb Station', 'Preneure Station'],
@@ -62,9 +73,20 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _travellersInformationWidget() {
-    return CustomDropDownButtonClass(
-      values: const ['1', '2', '3', '4'],
-      width: _deviceWidth * 0.45,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CustomDropDownButtonClass(
+          values: const ['1', '2', '3', '4'],
+          width: _deviceWidth * 0.40,
+        ),
+        CustomDropDownButtonClass(
+          values: const ['Economy', 'Business', 'First', 'Private'],
+          width: _deviceWidth * 0.40,
+        ),
+      ],
     );
   }
 }
