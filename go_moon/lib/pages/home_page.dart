@@ -60,6 +60,7 @@ class HomePage extends StatelessWidget {
         children: [
           _destinationDropDownWidget(),
           _travellersInformationWidget(),
+          _rideButton(),
         ],
       ),
     );
@@ -87,6 +88,22 @@ class HomePage extends StatelessWidget {
           width: _deviceWidth * 0.40,
         ),
       ],
+    );
+  }
+
+  Widget _rideButton() {
+    return Container(
+      margin: EdgeInsets.only(bottom: _deviceHeight * 0.01),
+      width: _deviceWidth,
+      // color: Colors.white,  // This may cause your app to clash if you've a color property and decoration property present at the same time
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: MaterialButton(
+        onPressed: () {},
+        child: const Text("Book Ride", style: TextStyle(color: Colors.black)),
+      ),
     );
   }
 }
