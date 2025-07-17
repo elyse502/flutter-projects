@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Taskly',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        appBarTheme: AppBarTheme(backgroundColor: Colors.red),
       ),
       home: HomePage(),
     );
