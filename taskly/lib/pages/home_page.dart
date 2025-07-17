@@ -24,6 +24,22 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(color: Colors.white, fontSize: 25),
         ),
       ),
+      body: _taskList(),
+    );
+  }
+
+  Widget _taskList() {
+    return ListView(
+      children: [
+        ListTile(
+          title: Text(
+            "Do Laundry!",
+            style: TextStyle(decoration: TextDecoration.lineThrough),
+          ),
+          subtitle: Text(DateTime.now().toString()),
+          trailing: Icon(Icons.check_box_outlined, color: Colors.red),
+        ),
+      ],
     );
   }
 }
