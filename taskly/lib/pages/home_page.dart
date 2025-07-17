@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: _taskList(),
+      floatingActionButton: _addTaskButton(),
     );
   }
 
@@ -40,6 +41,15 @@ class _HomePageState extends State<HomePage> {
           trailing: Icon(Icons.check_box_outlined, color: Colors.red),
         ),
       ],
+    );
+  }
+
+  Widget _addTaskButton() {
+    return FloatingActionButton(
+      onPressed: () {},
+      // shape: CircleBorder(),
+      backgroundColor: Colors.red,
+      child: Icon(Icons.add, color: Colors.white),
     );
   }
 }
