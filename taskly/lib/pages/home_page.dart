@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +16,11 @@ class _HomePageState extends State<HomePage> {
   _HomePageState();
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
@@ -27,8 +33,22 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(color: Colors.white, fontSize: 25),
         ),
       ),
-      body: _taskList(),
+      body: _taskView(),
       floatingActionButton: _addTaskButton(),
+    );
+  }
+
+  Widget _taskView() {
+    return FutureBuilder(
+      // future: Future.delayed(Duration(seconds: 2)),
+      future: Hive.openBox("tasks"),
+      builder: (BuildContext _context, AsyncSnapshot _snapshot) {
+        if (_snapshot.connectionState == ConnectionState.done) {
+          return _taskList();
+        } else {
+          return Center(child: CircularProgressIndicator(color: Colors.red));
+        }
+      },
     );
   }
 
