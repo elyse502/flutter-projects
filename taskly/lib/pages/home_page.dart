@@ -106,7 +106,31 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           content: TextField(
-            onSubmitted: (_value) {},
+            decoration: InputDecoration(
+              // Red underline styling
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red), // Default state
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red), // When focused
+              ),
+            ),
+            cursorColor: Colors.red,
+
+            onSubmitted: (_) {
+              if (_newTaskContent != null) {
+                var _task = Task(
+                  content: _newTaskContent!,
+                  timestamp: DateTime.now(),
+                  done: false,
+                );
+                _box!.add(_task.toMap());
+                setState(() {
+                  _newTaskContent = null;
+                  Navigator.pop(context);
+                });
+              }
+            },
             onChanged: (_value) {
               setState(() {
                 _newTaskContent = _value;
