@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:taskly/models/task.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +15,8 @@ class _HomePageState extends State<HomePage> {
   String? _newTaskContent;
 
   _HomePageState();
+
+  Box? _box;
 
   @override
   void initState() {
@@ -44,6 +47,7 @@ class _HomePageState extends State<HomePage> {
       future: Hive.openBox("tasks"),
       builder: (BuildContext _context, AsyncSnapshot _snapshot) {
         if (_snapshot.connectionState == ConnectionState.done) {
+          _box = _snapshot.data;
           return _taskList();
         } else {
           return Center(child: CircularProgressIndicator(color: Colors.red));
@@ -53,17 +57,34 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _taskList() {
-    return ListView(
-      children: [
-        ListTile(
+    // Add a new task to the box (hive database)
+    /*Task _newTask = Task(
+      content: "Go To Gym!",
+      timestamp: DateTime.now(),
+      done: false,
+    );
+    _box?.add(_newTask.toMap());*/
+    List tasks = _box!.values.toList();
+    return ListView.builder(
+      itemCount: tasks.length,
+      itemBuilder: (BuildContext _context, int _index) {
+        var task = Task.fromMap(tasks[_index]);
+        return ListTile(
           title: Text(
-            "Do Laundry!",
-            style: TextStyle(decoration: TextDecoration.lineThrough),
+            task.content,
+            style: TextStyle(
+              decoration: task.done ? TextDecoration.lineThrough : null,
+            ),
           ),
-          subtitle: Text(DateTime.now().toString()),
-          trailing: Icon(Icons.check_box_outlined, color: Colors.red),
-        ),
-      ],
+          subtitle: Text(task.timestamp.toString()),
+          trailing: Icon(
+            task.done
+                ? Icons.check_box_outlined
+                : Icons.check_box_outline_blank_outlined,
+            color: Colors.red,
+          ),
+        );
+      },
     );
   }
 
